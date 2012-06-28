@@ -5,7 +5,7 @@
 #/ /__| | | (_| |  _| ||  __/ (_| |\  /\  /  __/ |_) |
 #\____/_|  \__,_|_|  \__\___|\__,_| \/  \/ \___|_.__/ 
 #
-#		-[ Created by ©Nomsoft
+#		-[ Created by ï¿½Nomsoft
 #		  `-[ Original core by Anthony (Aka. CraftedDev)
 #
 #				-CraftedWeb Generation II-                  
@@ -17,10 +17,10 @@
 #                  The policy of Nomsoftware states: Releasing our software   
 #                  or any other files are protected. You cannot re-release    
 #                  anywhere unless you were given permission.                 
-#                  © Nomsoftware 'Nomsoft' 2011-2012. All rights reserved.    
+#                  ï¿½ Nomsoftware 'Nomsoft' 2011-2012. All rights reserved.    
 
 ?>
-<script type="text/javascript" src="javascript/jquery.js"></script>
+<script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="javascript/main.js"></script>
 
 
@@ -47,7 +47,6 @@ if($_GET['p']=='voteshop')
 if($GLOBALS['enableSlideShow']==true)
 {
 ?>
-	<script type="text/javascript" src="javascript/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="javascript/jquery.nivo.slider.js"></script>
     <script type="text/javascript">
     	$(window).load(function() {
