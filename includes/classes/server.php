@@ -5,7 +5,7 @@
 / /__| | | (_| |  _| ||  __/ (_| |\  /\  /  __/ |_) |
 \____/_|  \__,_|_|  \__\___|\__,_| \/  \/ \___|_.__/ 
 
-		-[ Created by ©Nomsoft
+		-[ Created by ï¿½Nomsoft
 		  `-[ Original core by Anthony (Aka. CraftedDev)
 
 				-CraftedWeb Generation II-                  
@@ -17,7 +17,7 @@
                   The policy of Nomsoftware states: Releasing our software   
                   or any other files are protected. You cannot re-release    
                   anywhere unless you were given permission.                 
-                  © Nomsoftware 'Nomsoft' 2011-2012. All rights reserved.  */
+                  ï¿½ Nomsoftware 'Nomsoft' 2011-2012. All rights reserved.  */
  
 class server {
 	
@@ -103,19 +103,52 @@ class server {
 				  </td>';
 		}
 		
-		//Get uptime
+				//Get uptime
 		if ($GLOBALS['serverStatus']['uptime']==TRUE) 
 		{	
-			connect::selectDB('logondb');
-			$getUp = mysql_query("SELECT starttime FROM uptime WHERE realmid='".$realm_id."' ORDER BY starttime DESC LIMIT 1"); 
-			$row = mysql_fetch_assoc($getUp); 
-			       
-			$time = time();
-			$uptime = $time - $row['starttime'];
+			connect::selectDB('logondb');			
+			$stats = mysql_query("SELECT starttime, maxplayers FROM uptime WHERE realmid ='".$realm_id."' ORDER BY starttime DESC LIMIT 1"); 
+			$row = mysql_fetch_assoc($stats);
+			$uptimetime = time() - $row['starttime'];
+		
+		
+			function format_uptime($seconds)
+			{
+            		$secs  = intval($seconds % 60);
+            		$mins  = intval($seconds / 60 % 60);
+            		$hours = intval($seconds / 3600 % 24);
+            		$days  = intval($seconds / 86400);
+
+            		$uptimeString='';
+
+            		if ($days)
+            		{
+                	$uptimeString .= $days;
+                	$uptimeString .= ((1 === $days) ? ' day' : ' days');
+            		}
+            		if ($hours)
+            		{
+                	$uptimeString .= ((0 < $days) ? ', ' : '').$hours;
+                	$uptimeString .= ((1 === $hours) ? ' hour' : ' hours');
+            		}
+            		if ($mins)
+            		{
+                	$uptimeString .= ((0 < $days || 0 < $hours) ? ', ' : '').$mins;
+                	$uptimeString .= ((1 === $mins) ? ' minute' : ' minutes');
+            		}
+            		if ($secs)
+            		{
+                	$uptimeString .= ((0 < $days || 0 < $hours || 0 < $mins) ? ', ' : '').$secs;
+                	$uptimeString .= ((1 === $secs) ? ' second' : ' seconds');
+            		}
+            		return $uptimeString;
+			}
 			
+			$staticUptime = format_uptime($uptimetime);
+
 			 echo '
 			       <td>
-			       	   <b>'.convTime($uptime).'</b> uptime
+			       	   <b>Uptime: '.$staticUptime.'</b>
 				   </td>
 			       </tr>';
 			}
